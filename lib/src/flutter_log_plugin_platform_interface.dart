@@ -14,7 +14,7 @@ abstract class FlutterLogPluginPlatform extends PlatformInterface {
   ///
   /// Defaults to [MethodChannelFlutterLogPlugin].
   static FlutterLogPluginPlatform get instance => _instance;
-  
+
   /// Platform-specific implementations should set this with their own
   /// platform-specific class that extends [FlutterLogPluginPlatform] when
   /// they register themselves.
@@ -25,5 +25,9 @@ abstract class FlutterLogPluginPlatform extends PlatformInterface {
 
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  Future<void> log(String level, String tag, String? msg) {
+    throw UnimplementedError('log() has not been implemented.');
   }
 }

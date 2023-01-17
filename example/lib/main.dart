@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:flutter_log_plugin/flutter_log_plugin.dart';
+import 'package:flutter_log_plugin/log.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,35 +14,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _flutterLogPlugin = FlutterLogPlugin();
-
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _flutterLogPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    [
+      Permission.storage,
+      Permission.manageExternalStorage,
+    ].request();
   }
 
   @override
@@ -55,7 +31,39 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    Log.v("this is verbose msg");
+                  },
+                  child: Text('Log.v')),
+              TextButton(
+                  onPressed: () {
+                    Log.d("this is debug msg");
+                  },
+                  child: Text('Log.d')),
+              TextButton(
+                  onPressed: () {
+                    Log.i("this is info msg");
+                  },
+                  child: Text('Log.i')),
+              TextButton(
+                  onPressed: () {
+                    Log.w("this is warn msg");
+                  },
+                  child: Text('Log.w')),
+              TextButton(
+                  onPressed: () {
+                    try {
+                      throw Exception('测试抛异常');
+                    } catch (e) {
+                      Log.e("this is error msg", e);
+                    }
+                  },
+                  child: Text('Log.e')),
+            ],
+          ),
         ),
       ),
     );
