@@ -9,31 +9,25 @@ class LogHostOutput extends LogOutput {
 
   @override
   void output(OutputEvent event) {
+    var message = '';
+    for (var msg in event.lines) {
+      message = '$message$msg\r\n';
+    }
     switch (event.level) {
       case Level.error:
-        event.lines.forEach((msg) {
-          _log.e(_tag, msg);
-        });
+        _log.e(_tag, message);
         break;
       case Level.warning:
-        event.lines.forEach((msg) {
-          _log.w(_tag, msg);
-        });
+        _log.w(_tag, message);
         break;
       case Level.info:
-        event.lines.forEach((msg) {
-          _log.i(_tag, msg);
-        });
+        _log.i(_tag, message);
         break;
       case Level.verbose:
-        event.lines.forEach((msg) {
-          _log.v(_tag, msg);
-        });
+        _log.v(_tag, message);
         break;
       default:
-        event.lines.forEach((msg) {
-          _log.d(_tag, msg);
-        });
+        _log.d(_tag, message);
         break;
     }
   }
