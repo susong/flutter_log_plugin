@@ -1,15 +1,16 @@
 package com.dream.flutter_log_plugin
 
 import android.content.Context
+import com.mf.log.LogConfig
 import com.mf.log.LogUtils
 
 object FlutterLogWrapper {
 
     fun init(context: Context) {
-        LogUtils.init(context, "mf/log", "flutter")
+        LogUtils.init(context, LogConfig.Builder().build())
     }
 
-    fun unInit(){
+    fun unInit() {
         LogUtils.unInit()
     }
 
