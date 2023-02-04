@@ -47,5 +47,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.github.susong:mflog:0.0.20'
+    implementation 'com.github.susong:mflog:0.0.21'
 }
