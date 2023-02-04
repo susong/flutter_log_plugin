@@ -22,12 +22,12 @@ class FlutterLogPlugin : FlutterPlugin, MethodCallHandler {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_log_plugin")
         channel.setMethodCallHandler(this)
         context = flutterPluginBinding.applicationContext
-        FlutterLogWrapper.init(context)
+//        FlutterLogWrapper.init(context)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-        FlutterLogWrapper.unInit()
+//        FlutterLogWrapper.unInit()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
