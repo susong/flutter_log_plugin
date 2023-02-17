@@ -7,6 +7,7 @@ class Log {
   Log._();
 
   static final Logger _logger = Logger(
+    filter: ProductionFilter(), // release版本也打印
     printer: PrettyPrinter(
       // 跳过方法调用栈的个数，用法看文档，分析调试源码后，传4可过滤包装的调用栈。
       stackTraceBeginIndex: 4,
