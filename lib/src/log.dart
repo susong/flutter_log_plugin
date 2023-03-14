@@ -13,6 +13,7 @@ class Log {
       stackTraceBeginIndex: 1,
       // logger 1.3.0 版本，对methodCount实现进行了修改，真实的方法数为 methodCount-stackTraceBeginIndex
       methodCount: 3,
+      errorMethodCount: 100,
       colors: false,
       printEmojis: false,
       printTime: false,
@@ -24,6 +25,7 @@ class Log {
   static final Logger _logger2 = Logger(
     filter: ProductionFilter(), // release版本也打印
     printer: PrettyPrinter(
+      errorMethodCount: 100,
       colors: false,
       printEmojis: false,
       printTime: false,
